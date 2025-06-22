@@ -18,6 +18,7 @@ const ShopPage = () => {
     const navigate = useNavigate();
 
     return <Box>
+        
         <Box>
             <Button>
                 домашняя страница
@@ -35,12 +36,16 @@ const ShopPage = () => {
             </Box>
 
             <Button
+            onClick={() => navigate('/registration')}
             >
                 учётная запись
             </Button>
             <Button>
                 контакты
             </Button>
+            <Button
+            onClick={() => navigate('/main')}
+            >admin</Button>
         </Box>
 
         {MusicShopData.map((item, key) => (
@@ -50,7 +55,6 @@ const ShopPage = () => {
                 image={`${process.env.PUBLIC_URL + item.image}`}
 
             />
-
 
             /*<Box sx={{
                 width: "250px",

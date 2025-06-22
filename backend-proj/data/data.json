@@ -20,11 +20,16 @@
         {
             "id": 1,
             "title": "Rea",
-            "checked": true
+            "checked": false
         },
         {
             "id": 2,
             "title": "Qeeqwr",
+            "checked": false
+        },
+        {
+            "id": 3,
+            "title": "dsgj;m;klg;",
             "checked": false
         }
     ]
