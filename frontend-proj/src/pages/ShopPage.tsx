@@ -1,24 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MusicShopData } from "../helpers/MusicShopData";
 import ShopGoods from "../components/ShopGoods";
 
+import { deleteDataId, getData } from "../api/controllers/new-controller";
 
+import { shopDto } from "../types/common/data.types";
 
 import {
     Box,
     Button,
     Typography,
     Input,
-    TextField
+    TextField,
+    List,
+    ListItem
 } from "@mui/material";
 
 
 const ShopPage = () => {
     const navigate = useNavigate();
+    const [data, setData] = React.useState<shopDto[]>();
+
+    useEffect(() => {
+        getData()
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch(e => console.log(e));
+    }, []);
+
+    const deleteRecord = (idRecord: number) => {
+        deleteDataId(idRecord)
+            .then((response) => {
+                console.log(response);
+                getData()
+                    .then((response) => {
+                        setData(response.data);
+                    })
+                    .catch(e => console.log(e));
+            })
+            .catch((e) => console.log(e));
+    }
 
     return <Box>
-        
+
         <Box>
             <Button>
                 домашняя страница
@@ -36,7 +62,7 @@ const ShopPage = () => {
             </Box>
 
             <Button
-            onClick={() => navigate('/registration')}
+                onClick={() => navigate('/registration')}
             >
                 учётная запись
             </Button>
@@ -44,44 +70,41 @@ const ShopPage = () => {
                 контакты
             </Button>
             <Button
-            onClick={() => navigate('/main')}
+                onClick={() => navigate('/main')}
             >admin</Button>
         </Box>
+        <List
+        sx={{display: 'flex',
+            
+        }}
+        >
+            {data?.map((item, key) => (
+                <ListItem
+                    key={`listItem-${key}`}
+                >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            border: '1px black solid',
+                            width: '250px',
+                            height: '250px'
+                        }}
+                    >
+                        <Typography
+                        >
+                            Имя: {item.name}
+                        </Typography>
+                        <Typography
+                        >
+                            Цена: {item.cost}
+                        </Typography>
+                    </Box>
 
-        {MusicShopData.map((item, key) => (
-            <ShopGoods
-                name={item.name}
-                cost={item.cost}
-                image={`${process.env.PUBLIC_URL + item.image}`}
-
-            />
-
-            /*<Box sx={{
-                width: "250px",
-                height: "250px",
-                border: "2px solid black",
-                borderRadius: "20px",
-                padding: "10px",
-                margin: "20px"
-            }}>
-                <Typography sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    fontSize: "25px",
-                    color: "orange"
-                }}>{item.name}</Typography>
-                <Box>{item.image}</Box>
-                <Typography sx={{
-                    color: "green",
-                    display: "flex",
-                    justifyContent: "center",
-                    fontSize: "20px",
-                }}>{item.cost}₽</Typography>
-            </Box> */
-
-
-        ))}
+                </ListItem>
+            ))}
+        </List>
     </Box>
+
 };
 
 export default ShopPage;

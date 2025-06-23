@@ -8,6 +8,7 @@ import {
   Button,
   Typography
 } from "@mui/material";
+import { getNewController } from "../api/controllers/new-controller";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -21,6 +22,11 @@ const MainPage = () => {
         setData(response.data.message);
       })
       .catch((e) => console.log(e));
+
+      getNewController()
+      .then((response) => {
+        console.log(response);
+      })
   }, []);
 
   return <Box
