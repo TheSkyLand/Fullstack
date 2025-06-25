@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 
 interface ShopGoodsProps {
+    id: number
     name: string
     cost: number
     image: string
@@ -13,7 +14,7 @@ interface ShopGoodsProps {
 const ShopGoods = (props: ShopGoodsProps) => {
     const navigate = useNavigate();
 
-    return <Button onClick={() => navigate('/product/${item.id}')}>
+    return <Button onClick={() => navigate(`/product/${props.id}`)}>
         <Box sx={{
             width: "250px",
             height: "250px",
