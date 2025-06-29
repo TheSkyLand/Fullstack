@@ -24,7 +24,3 @@ export const editDataId = (id: number, body: shopDto) => {
 export const deleteDataId = (id: number) => {
     return $api.delete(`/api/data/${id}`, { headers: config() });
 }
-
-export const getNewController = () => {
-    return $api.get('api/data/', { headers: config()});
-}

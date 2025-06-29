@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MusicShopData } from "../helpers/MusicShopData";
 import ShopGoods from "../components/ShopGoods";
 
 import { deleteDataId, getData } from "../api/controllers/new-controller";
@@ -82,23 +81,7 @@ const ShopPage = () => {
                 <ListItem
                     key={`listItem-${key}`}
                 >
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            border: '1px black solid',
-                            width: '250px',
-                            height: '250px'
-                        }}
-                    >
-                        <Typography
-                        >
-                            Имя: {item.name}
-                        </Typography>
-                        <Typography
-                        >
-                            Цена: {item.cost}
-                        </Typography>
-                    </Box>
+                    <ShopGoods id={key} cost={item.cost} name={item.name} info={item.info} image={item.image} />
 
                 </ListItem>
             ))}

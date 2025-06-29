@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getCommon } from "../api/controllers/common-contreller";
+import { getCommon } from "../api/controllers/new-controller";
 
 import {
   Box,
   Button,
   Typography
 } from "@mui/material";
-import { getNewController } from "../api/controllers/new-controller";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -22,11 +21,6 @@ const MainPage = () => {
         setData(response.data.message);
       })
       .catch((e) => console.log(e));
-
-      getNewController()
-      .then((response) => {
-        console.log(response);
-      })
   }, []);
 
   return <Box
@@ -36,29 +30,15 @@ const MainPage = () => {
     }}
   >
     <Typography
-      component={'h2'}
-      sx={{
-        fontSize: '22px',
-        my: 2
-      }}
     >
       {
         data ? data : 'Данных с сервера нет'
       }
     </Typography>
     <Button
-      variant='outlined'
-      color='warning'
-      onClick={() => navigate('/change-backend')}
+      onClick={() => navigate('/product-add')}
     >
       Change data
-    </Button>
-    <Button
-      variant='outlined'
-      color='warning'
-      onClick={() => navigate('/mobx')}
-    >
-      Mobx
     </Button>
   </Box>
 };

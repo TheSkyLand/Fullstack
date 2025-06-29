@@ -45,12 +45,7 @@ const ProductAdd = () => {
         }}
     >
         <Button
-            variant='contained'
-            color='success'
             onClick={() => navigate('/product-add/new/')}
-            sx={{
-                my: 1
-            }}
         >
             Создать новую запись
         </Button>
@@ -59,27 +54,23 @@ const ProductAdd = () => {
                 data?.map((item, key) => (
                     <ListItem
                         key={`listItem-${key}`}
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            border: '1px solid #007dea'
-                        }}
                     >
                         <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}
                         >
                             <Typography
-                                component={'h3'}
                             >
                                 Имя: {item.name}
                             </Typography>
                             <Typography
-                                component={'h4'}
                             >
                                 Цена: {item.cost}
+                            </Typography>
+                            <Typography
+                            >
+                                Информация: {item.info}
+                            </Typography>
+                            <Typography>
+                                Ссылка на изображение продукта: {item.image}
                             </Typography>
                         </Box>
                         <Box
@@ -89,19 +80,13 @@ const ProductAdd = () => {
                             }}
                         >
                             <Button
-                                color='info'
-                                variant='contained'
+
                                 onClick={() => navigate(`/product-add/edit/${item.id}`)}
                             >
                                 Изменить
                             </Button>
                             <Button
-                                color='error'
-                                variant='contained'
                                 onClick={() => deleteRecord(Number(item.id))}
-                                sx={{
-                                    mt: 1
-                                }}
                             >
                                 Удалить
                             </Button>

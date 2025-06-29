@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom"
 interface ShopGoodsProps {
     id: number
     name: string
-    cost: number
+    cost: string
     image: string
+    info: string
 }
 
 

@@ -13,8 +13,7 @@ export const config = () => {
 }
 
 $api.interceptors.response.use(function (response) {
-    // Любой код состояния, находящийся в диапазоне 2xx, вызывает срабатывание этой функции
-    // Здесь можете сделать что-нибудь с ответом
+
     return response;
 }, function (error) {
     if (error.response != null) {
@@ -27,7 +26,7 @@ $api.interceptors.response.use(function (response) {
                         break;
                     case 401:
                     case 403:
-                        // Переход. Если не прошёл авторизацию
+
                         window.location.replace("/");
                         break;
                     case 404:
@@ -37,22 +36,12 @@ $api.interceptors.response.use(function (response) {
                 }
                 break;
             case 5:
-                // if (error.response.status >= 500 && error.response.status <= 505) {
-                //     window.location.replace(`/error?code=${error.response.status}`);
-                // }
+
                 break;
             default:
-                // window.location.replace("/error");
+
                 break;
         }
     }
-
-    // if (error.response == null) {
-    //     window.location.replace("/error");
-    //     return;
-    // }
-
-    // Любые коды состояния, выходящие за пределы диапазона 2xx, вызывают срабатывание этой функции
-    // Здесь можете сделать что-то с ошибкой ответа
     return Promise.reject(error);
 });

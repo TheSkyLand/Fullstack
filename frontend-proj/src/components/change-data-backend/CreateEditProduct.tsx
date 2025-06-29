@@ -14,9 +14,10 @@ const CreateEditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [cost, setCost] = React.useState(0);
+    const [cost, setCost] = React.useState('');
     const [name, setName] = React.useState('');
-
+    const [info, setInfo] = React.useState('');
+    const [image, setImage] = React.useState('')
 
     useEffect(() => {
         if (id) {
@@ -24,6 +25,8 @@ const CreateEditProduct = () => {
                 .then((response) => {
                     setName(response.data.name);
                     setCost(response.data.cost);
+                    setInfo(response.data.info);
+                    setImage(response.data.image)
                 })
                 .catch((e) => console.log(e));
         }
@@ -33,6 +36,8 @@ const CreateEditProduct = () => {
         const data = {
             name: name,
             cost: cost,
+            info: info,
+            image: image
         }
 
         id ?
@@ -60,7 +65,6 @@ const CreateEditProduct = () => {
             sx={{
                 fontSize: '26px',
                 my: 1,
-                textDecoration: 'underline'
             }}
         >
             {id ? 'Редактировать запись' : 'Создать новую запись'}
@@ -79,13 +83,30 @@ const CreateEditProduct = () => {
             Цена:
         </Typography>
         <TextField
-            value={cost === 0 ? '' : cost}
-            type="number"
-            onChange={(e) => setCost(+e.target.value)}
+            onChange={(e) => setCost(e.target.value)}
         />
+        <Typography>
+            Информация:
+        </Typography>
+        <TextField
+            value={info}
+            onChange={(e) => setInfo(e.target.value)}
+            sx={{
+                mb: 2
+            }}
+        >
+        </TextField>
+        <Typography>
+            путь к фотографии товара:
+        </Typography>
+        <TextField
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            sx={{
+                mb: 2
+            }}
+        ></TextField>
         <Button
-            variant='contained'
-            color='success'
             onClick={processingRequest}
             sx={{
                 display: 'block',
