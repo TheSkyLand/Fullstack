@@ -18,6 +18,8 @@ const Router = () => {
       <Route path='/product-add/new' element={<CreateEditProduct />} />
       <Route path='/product-add/edit/:id' element={<CreateEditProduct />} />
 
+      
+
       <Route path='/main' element={<MainPage />} />
     </Routes>
   );
