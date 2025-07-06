@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getCommon } from "../api/controllers/new-controller";
+import IdPage from "./IdPage";
 
 import {
   Box,
@@ -40,6 +41,7 @@ const MainPage = () => {
     >
       Change data
     </Button>
+    <IdPage/>
   </Box>
 };
 

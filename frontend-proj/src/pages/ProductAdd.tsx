@@ -80,7 +80,6 @@ const ProductAdd = () => {
                             }}
                         >
                             <Button
-
                                 onClick={() => navigate(`/product-add/edit/${item.id}`)}
                             >
                                 Изменить

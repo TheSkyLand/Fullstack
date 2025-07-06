@@ -1,48 +1,49 @@
-import {createRequire} from "module";
-const require = createRequire(import.meta.url);
+import {
+    createRequire
+} from "module";
+const require = createRequire(
+    import.meta.url);
 
-const data = require('../../data/shopdata.json');
+const data = require('../../data/shopdata.json')
 
 import {updateJsonFile} from "../helpers/_updateJson.js";
 import {searchIndexObjectDataParamId,searchObjectDataParamId}from "../helpers/_searchDatabase.js";
 
+export const test = (app) => {
 
-
-export const dataApiShop = (app) => {
-    app.get('/api/data/', (req, res) => {
+    app.get('/help/data/', (req, res) => {
         return (
             res.json(data.productsData)
         )
     })
+    app.get('/help/data/:id', (req, res) => {
 
-    app.get('/api/data/:id', (req, res) => {
-        const idDataReq = req.params.id;
+        const reqId = req.params.id;
 
-        console.log('start request id: ' + idDataReq);
+        console.log('start request id: ' + reqId);
 
-        const dataResponse = searchObjectDataParamId(idDataReq, data.productsData);
-
-        if (!dataResponse) {
-            console.log('No id: ' + idDataReq);
-            return res.status(404).send("Data not found");
-        } else {
-            res.json(dataResponse);
+        const dataResponse = searchObjectDataParamId(reqId, data.productsData);
+        for (let i = 0; i < data.productsData.length; i++) {
+            if (reqId == data.productsData.length[i])
+            {
+                console.log(reqId)
+            }
         }
+        return( res.json(dataResponse))
     });
 
-
-    app.post('/api/data/', (req, res) => {
-        console.log('create new element ...');
-
-
+    /////////////////////////////////////
+    
+    app.post('/help/data/', (req, res) => {
+        console.log('test');
         let idNewData = 0;
 
         if (data.productsData.length !== 0) {
-            idNewData = data.productsData[data.productsData.length - 1].id + 1;
+            idNewData = data.productsData[data.productsData.length - 1].id + 1
         }
 
-        console.log(idNewData);
-        const createdData = req.body;
+        console.log(idNewData)
+        const createdData = req.body
 
         data.productsData.push({
             id: idNewData,
@@ -50,17 +51,16 @@ export const dataApiShop = (app) => {
             cost: createdData.cost,
             info: createdData.info,
             image: createdData.image
-        });
+        })
 
         updateJsonFile('shopdata.json', data);
-
         console.log('creation completed')
 
         return (
             res.json(data.productsData[data.productsData.length - 1])
         );
     })
-    app.put('/api/data/:id', (req, res) => {
+        app.put('/help/data/:id', (req, res) => {
         console.log('change data for id: ' + req.params.id);
         const idDataReq = req.params.id;
         const updatedData = req.body;
@@ -87,8 +87,7 @@ export const dataApiShop = (app) => {
             console.log("completed change data");
         }
     });
-
-    app.delete('/api/data/:id', (req, res) => {
+    app.delete('/help/data/:id', (req, res) => {
         console.log(`Delete ${req.params.id} ...`);
 
         const filterArray = data.productsData.filter((item) => item.id !== +req.params.id);

@@ -3,19 +3,18 @@ const require = createRequire(import.meta.url);
 
 const express = require("express");
 
-import { dataApiShop } from "./src/api/_dataApiShop.js";
+import { test } from "./src/api/test.js";
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json());
 
-
-dataApiShop(app);
+test(app)
 app.listen(PORT, () => {
 	console.log(`Server starting on port ${PORT}`);
 });
-app.get('/api', (req, res) => {
+app.get('/help', (req, res) => {
 	res.json({
 		message: 'Hello from backend server'
 	})

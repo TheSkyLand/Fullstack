@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import ShopPage from '../pages/ShopPage';
-import SecondPage from '../pages/SecondPage';
 
 import MainPage from '../pages/MainPage';
 
@@ -12,7 +11,6 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/" index element={<ShopPage />} />
-      <Route path='/second' element={<SecondPage />} />
 
       <Route path='/product-add' element={<ProductAdd /> }/>
       <Route path='/product-add/new' element={<CreateEditProduct />} />

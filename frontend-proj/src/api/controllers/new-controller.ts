@@ -1,9 +1,25 @@
 import { $api, config } from "../index";
 import { shopDto } from "../../types/common/data.types";
 
+
 export const getCommon = () => {
-    return $api.get('/api', { headers: config() });
+    return $api.get('/help', { headers: config() });
 }
+
+export const getIdTest = (id: number) => {
+    return $api.get(`/help/${id}`, {headers: config() })
+}
+
+export const getDataTest = () => {
+    return $api.get(`/help/data/`, {headers: config() })
+}
+
+export const getId = (id: number) => {
+    return $api.get(`/help/data/${id}`, {headers: config() })
+}
+
+
+////////////////////////
 
 export const getData = () => {
     return $api.get('/api/data/', { headers: config() });
