@@ -3,7 +3,7 @@ const require = createRequire(import.meta.url);
 
 const data = require('../../data/shopdata.json');
 
-import {updateJsonFile} from "../helpers/_updateJson.js";
+import {updateJsonFile} from "../helpers/_refreshData.js";
 import {searchIndexObjectDataParamId,searchObjectDataParamId}from "../helpers/_searchDatabase.js";
 
 
@@ -13,7 +13,8 @@ export const dataApiShop = (app) => {
         return (
             res.json(data.productsData)
         )
-    })
+    }
+)
 
     app.get('/api/data/:id', (req, res) => {
         const idDataReq = req.params.id;
@@ -33,7 +34,6 @@ export const dataApiShop = (app) => {
 
     app.post('/api/data/', (req, res) => {
         console.log('create new element ...');
-
 
         let idNewData = 0;
 
