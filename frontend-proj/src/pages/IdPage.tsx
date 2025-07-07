@@ -1,22 +1,17 @@
+import { Box, Button } from "@mui/material"
 
-
-
-import { useNavigate } from "react-router-dom";
-import { getId } from "../api/controllers/new-controller";
-import { Box, Button, TextField } from "@mui/material";
+import { getCommon, getDataTest, getId, getIdTest } from "../api/controllers/new-controller"
 
 const IdPage = () => {
-    const navigate = useNavigate();
-    
-
-
-    return <Box>
+    return (<Box>
         <Button
-        onClick={() => getId(1)}
+            onClick={() => getId(0)}
         >
             jnhn
         </Button>
     </Box>
+    )
+
 }
 
 export default IdPage
