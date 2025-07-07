@@ -1,19 +1,27 @@
-import {createRequire} from "module";
-const require = createRequire(import.meta.url);
+import {
+    createRequire
+} from "module";
+const require = createRequire(
+    import.meta.url);
 const data = require('../../data/shopdata.json')
-import {updateJsonFile} from "../helpers/_refreshData.js";
-import {searchIndexObjectDataParamId,searchObjectDataParamId}from "../helpers/_searchDatabase.js";
+import {
+    updateJsonFile
+} from "../helpers/_refreshData.js";
+import {
+    searchIndexObjectDataParamId,
+    searchObjectDataParamId
+} from "../helpers/_searchDatabase.js";
 
 
 
-export const test = (app) => {
-    app.get('/help', (req, res) => {
+export const shopApi = (app) => {
+    app.get('/shop', (req, res) => {
         return (
             res.json(data.productsData)
         )
     })
 
-    app.get('/help/data/:id', (req, res) => {
+    app.get('/shop/data/:id', (req, res) => {
 
         const reqId = req.params.id;
         let resP = 'test'
@@ -21,19 +29,19 @@ export const test = (app) => {
         console.log('start request id: ' + reqId);
 
         //const dataResponse = searchObjectDataParamId(reqId, data.productsData);
-        
+
         for (let i = 0; i < data.productsData.length; i++) {
             if (data.productsData[i].id == reqId) {
                 resP = data.productsData[i]
             }
         }
-            
+
         return (res.json(resP))
     });
 
     /////////////////////////////////////
 
-    app.post('/help/data/', (req, res) => {
+    app.post('/shop/data/', (req, res) => {
         console.log('test');
         let idNewData = 0;
 
@@ -59,7 +67,8 @@ export const test = (app) => {
             res.json(data.productsData[data.productsData.length - 1])
         );
     })
-    app.put('/help/data/:id', (req, res) => {
+
+    app.put('/shop/data/:id', (req, res) => {
         console.log('change data for id: ' + req.params.id);
         const idDataReq = req.params.id;
         const updatedData = req.body;
@@ -81,12 +90,14 @@ export const test = (app) => {
             }
 
             data.productsData[indexProductsData] = newElement;
-            updateJsonFile('shopdata.json', data);
+
+            fs.writeFileSync(`data/${file}`, JSON.stringify(data, null, 4));
+
             res.json(data.productsData[indexProductsData]);
             console.log("completed change data");
         }
     });
-    app.delete('/help/data/:id', (req, res) => {
+    app.delete('/shop/data/:id', (req, res) => {
         console.log(`Delete ${req.params.id} ...`);
 
         const filterArray = data.productsData.filter((item) => item.id !== +req.params.id);
